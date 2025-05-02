@@ -1,6 +1,9 @@
 from first import get_differences
 import numpy as np, statistics
 
-differences = get_differences()
-avg_days = statistics.mean(differences)
-print(avg_days)
+def get_avg_days():
+    differences = get_differences()
+    return statistics.mean(differences)
+
+if __name__ == "__main__":
+    print(get_avg_days())
