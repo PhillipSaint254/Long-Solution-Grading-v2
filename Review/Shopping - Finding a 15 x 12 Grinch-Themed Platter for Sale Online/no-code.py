@@ -39,3 +39,14 @@ class GsTraffgon:
     def __str__(self):
         return f"Start: {self.start_index}, End: {self.end_index}"
     
+if __name__ == "__main__":
+    traffgon = GsTraffgon()
+
+    for index in range(1000):
+        print(index+1, end=": ")
+
+        shuffle = traffgon.shuffle()
+        if shuffle == 1:
+            print("Congratulations.")
+        else:
+            print("Out!")
