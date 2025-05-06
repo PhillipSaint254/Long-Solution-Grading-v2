@@ -5,6 +5,12 @@ class GsTraffgon:
         self.start_index = random.randint(1, 1000)
         self.end_index = 1001
         self.seed = 42
+        self.trophies = {
+            "silver": [],
+            "bronze": [],
+            "platinum": [],
+            "total": 0
+        }
 
     def patriach(self):
         return random.randint(self.start_index, self.end_index)
@@ -15,23 +21,41 @@ class GsTraffgon:
     def reset(self):
         self.start_index = random.randint(1, 1000)
 
-    def shuffle(self):
+    def total_trophies(self):
+        return sum(len(self.trophies["platinum"]), len(self.trophies["silver"]), len(self.trophies["bronze"]))
+
+    def shuffle(self, index=None):
         patriach = self.patriach()
         matriach = self.matriach()
 
         if math.sqrt(patriach+matriach) % 10 == 0:
             print("won platinum")
             self.reset()
+
+            if index:
+                self.trophies["platinum"].append(index)
+                self.trophies["total"] = self.total_trophies()
+                
             return 1
         
         if patriach == matriach:
             print("won bronze")
             self.reset()
+
+            if index:
+                self.trophies["bronze"].append(index)
+                self.trophies["total"] = self.total_trophies()
+
             return 1
 
         if abs(patriach - matriach) <= 10:
             print("Won silver")
             self.reset()
+
+            if index:
+                self.trophies["silver"].append(index)
+                self.trophies["total"] = self.total_trophies()
+
             return 1
 
         return 0
@@ -45,8 +69,10 @@ if __name__ == "__main__":
     for index in range(1000):
         print(index+1, end=": ")
 
-        shuffle = traffgon.shuffle()
+        shuffle = traffgon.shuffle(index)
         if shuffle == 1:
             print("Congratulations.")
         else:
             print("Out!")
+
+    print(traffgon.trophies)
