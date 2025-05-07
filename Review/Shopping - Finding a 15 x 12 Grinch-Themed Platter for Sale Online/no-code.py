@@ -22,11 +22,13 @@ class GsTraffgon:
         self.start_index = random.randint(1, 1000)
 
     def total_trophies(self):
-        return sum(len(self.trophies["platinum"]), len(self.trophies["silver"]), len(self.trophies["bronze"]))
+        return len(self.trophies["platinum"]) + len(self.trophies["silver"]) + len(self.trophies["bronze"])
 
     def shuffle(self, index=None):
         patriach = self.patriach()
         matriach = self.matriach()
+
+        print(f"[Patriach: {patriach}, Matriach: {matriach}]", end=" ")
 
         if math.sqrt(patriach+matriach) % 10 == 0:
             print("won platinum")
@@ -69,7 +71,7 @@ if __name__ == "__main__":
     for index in range(1000):
         print(index+1, end=": ")
 
-        shuffle = traffgon.shuffle(index)
+        shuffle = traffgon.shuffle(index=index)
         if shuffle == 1:
             print("Congratulations.")
         else:
